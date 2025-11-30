@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
+use Illuminate\Validation\Rules\Password;
 use Intervention\Image\Drivers\Gd\Driver;
 
 class UserController extends Controller
@@ -45,6 +47,30 @@ class UserController extends Controller
                 'name'=>$request->name,
             ]);
             return back()->with('success', 'Profile Updated');
+        }
+    }
+    function update_passsword(Request $request){
+        $request->validate([
+            'current_password'=>'required',
+            'password'=>[
+                'required',
+                'confirmed',
+                Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+            ],
+            'password_confirmation'=>'required',
+
+        ]);
+        if(Hash::check($request->current_password, Auth::user()->password)){
+            User::find(Auth::id())->update([
+                'password'=>bcrypt($request->password),
+            ]);
+            return back()->with('pass_update', 'Current password Changed');
+        }else{
+            return back()->with('wrong', 'Current Password Not Match');
         }
     }
 }

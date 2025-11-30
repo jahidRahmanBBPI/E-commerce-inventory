@@ -38,7 +38,7 @@
         <ul class="nav">
           <li class="nav-item nav-category">Main</li>
           <li class="nav-item">
-            <a href="../../dashboard-one.html" class="nav-link">
+            <a href="{{ route('dashboard') }}" class="nav-link">
               <i class="link-icon" data-feather="box"></i>
               <span class="link-title">Dashboard</span>
             </a>
@@ -47,13 +47,13 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
               <i class="link-icon" data-feather="mail"></i>
-              <span class="link-title">Email</span>
+              <span class="link-title">Category</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapse" id="emails">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="../../pages/email/inbox.html" class="nav-link">Inbox</a>
+                  <a href="{{ route('add.category') }}" class="nav-link">Add Category</a>
                 </li>
                 <li class="nav-item">
                   <a href="../../pages/email/read.html" class="nav-link">Read</a>
@@ -630,6 +630,7 @@
 
 	<!-- core:js -->
 	<script src="{{ asset('frontend_asset') }}/vendors/core/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- endinject -->
 	<!-- plugin js for this page -->
 	<!-- end plugin js for this page -->
@@ -639,5 +640,6 @@
 	<!-- endinject -->
 	<!-- custom js for this page -->
   <!-- end custom js for this page -->
+  @yield('footer_script')
 </body>
 </html>
