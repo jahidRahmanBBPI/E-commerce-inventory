@@ -563,23 +563,32 @@
 						</li>
 						<li class="nav-item dropdown nav-profile">
 							<a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img src="https://placehold.co/30x30" alt="profile">
+                                @if (Auth::user()->photo == null)
+                                    <img src="https://placehold.co/30x30" alt="">
+                                @else
+                                    <img src="{{ asset('uploads/users') }}/{{ Auth::user()->photo }}" alt="">
+                                @endif
 							</a>
 							<div class="dropdown-menu" aria-labelledby="profileDropdown">
 								<div class="dropdown-header d-flex flex-column align-items-center">
 									<div class="figure mb-3">
-										<img src="https://placehold.co/80x80" alt="">
+                                        @if (Auth::user()->photo == null)
+                                            <img src="https://placehold.co/80x80" alt="">
+                                        @else
+                                            <img src="{{ asset('uploads/users') }}/{{ Auth::user()->photo }}" alt="">
+                                        @endif
+
 									</div>
 									<div class="info text-center">
-										<p class="name font-weight-bold mb-0">Amiah Burton</p>
-										<p class="email text-muted mb-3">amiahburton@gmail.com</p>
+										<p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
+										<p class="email text-muted mb-3">{{ Auth::user()->email }}</p>
 									</div>
 								</div>
 								<div class="dropdown-body">
 									<ul class="profile-nav p-0 pt-3">
 
 										<li class="nav-item">
-											<a href="javascript:;" class="nav-link">
+											<a href="{{ route('edit.profile') }}" class="nav-link">
 												<i data-feather="edit"></i>
 												<span>Edit Profile</span>
 											</a>
