@@ -19,10 +19,10 @@ class UserController extends Controller
                 'photo' => 'mimes:jpg,jpeg,png,webp|max:1024',
             ]);
 
-            // if(Auth::user()->photo != null){
-            //     $delete_form = public_path('uploads/users/'.Auth::user()->photo);
-            //     unlink($delete_form);
-            // }
+            if(Auth::user()->photo != null){
+                $delete_form = public_path('uploads/users/'.Auth::user()->photo);
+                unlink($delete_form);
+            }
 
             $extension = $request->photo->extension();
             $file_name = uniqid(). '.' . $extension;
